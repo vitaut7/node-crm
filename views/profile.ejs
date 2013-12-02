@@ -1,0 +1,181 @@
+<% include header %>
+<div id="profile-page" class="container">
+		<div class="span12">
+				<h2 class="pull-left" style="color: #0099CC">
+					<i class="icon-tasks"></i> Profile
+				</h2>
+				<div class="clearfix"></div>
+								
+				<hr class="btn-info" />
+		</div>
+		<div class="span12">
+			<div id="alertbox"></div>
+			
+		    <div class="tabbable"> <!-- Only required for left/right tabs -->
+		    	<div id="editIcon" class="pull-right"><a href='btn btn-info' style="text-decoration: none" data-bind="click: showUpdateForm"><i class="icon-edit icon-3x"></i></a></div>
+			    <ul class="nav nav-tabs">
+				    <li class="active"><a href="#profile" data-toggle="tab" data-bind="click: showIcon">Account Update</a></li>
+				    <li><a href="#invite" data-toggle="tab" data-bind="click: hideIcon">Invite Colleagues</a></li>
+		    	</ul>
+			    <div class="tab-content">
+				    <div class="tab-pane active" id="profile" data-bind="with: selectedContact">
+				    	<div id="contactDisplay">
+				    		<form class="form-horizontal">
+								<fieldset>							
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Name:</label>
+										<div class="controls">
+											<label style="padding-top: 5px" data-bind="text: $data.Name"></label>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Email Address:</label>
+										<div class="controls">
+											<label style="padding-top: 5px" data-bind="text: $data.Email_Address"></label>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Username:</label>
+										<div class="controls">
+											<label style="padding-top: 5px" data-bind="text: $data.Username"></label>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Password:</label>
+										<div class="controls">
+											<label style="padding-top: 5px" data-bind="text: $data.Password"></label>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Phone:</label>
+										<div class="controls">
+											<label style="padding-top: 5px" data-bind="text: $data.Phone"></label>
+										</div>
+									</div>	
+																		
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Company Name:</label>
+										<div class="controls">
+											<label style="padding-top: 5px" data-bind="text: $data.Company_Name"></label>
+										</div>
+									</div>	
+									
+								</fieldset>
+							</form>
+						</div>
+				    	
+						<div id="contactUpdateForm" data-bind="visible: $parent.contactUpdating" style="display: none">
+							<form class="form-horizontal">
+								<fieldset>							
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Name</label>
+										<div class="controls">
+											<input placeholder="Full Name" class="input-xlarge" type="text" data-bind="value: $data.Name">
+											<p class="help-block"></p>
+										</div>
+									</div>
+			
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Email Address</label>
+										<div class="controls">
+											<div class="input-prepend">
+											<span class="add-on"><i class="icon-envelope"></i></span>
+											<input style="width: 244px" placeholder="john.doe@example.com" class="input-xlarge" type="text" data-bind="value: $data.Email_Address">
+											</div>
+											<p class="help-block"><i style='color: indianred'>Changing this will require a re-verification of your account</i></p>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Username</label>
+										<div class="controls">
+											<label style="padding-top: 5px" data-bind="text: $data.Username"></label>
+											<p class="help-block"></p>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Password</label>
+										<div class="controls">
+											<input id="profilePassword" placeholder="Password" class="input-xlarge" type="password" data-bind="value: $data.Password">
+											<p class="help-block"></p>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Phone</label>
+										<div class="controls">
+											<div class="input-prepend">
+											<span class="add-on"><i class="icon-phone"></i></span>
+											<input style="width: 244px" placeholder="Phone Number" class="input-xlarge" type="text" data-bind="value: $data.Phone">
+											</div>
+											<p class="help-block"></p>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<!-- Text input-->
+										<label class="control-label" for="input01">Company Name</label>
+										<div class="controls">
+											<label style="padding-top: 5px" data-bind="text: $data.Company_Name"></label>
+										</div>
+									</div>
+			
+									<div class="control-group">
+										<label class="control-label"></label>
+										<!-- Button -->
+										<div class="controls">
+											<button class="btn btn-primary" data-bind="click: $parent.update">Save</button>
+											<button class="btn btn-danger" data-bind="click: $parent.cancel">Cancel</button>
+										</div>
+									</div>
+			
+								</fieldset>
+							</form>
+						</div>	
+									    	
+				    </div>
+				    
+				    <div class="tab-pane" id="invite">
+				    	<div id="invitealert"></div>
+				    	<div id="inviteContact">
+					    	<form class="form-horizontal">
+						    	<fieldset>
+						    		<div class="control-group">
+												<!-- Text input-->
+												<div class="">
+													<div class="input-prepend">
+													<span class="add-on"><i class="icon-envelope"></i></span>
+													<input style="width: 244px" placeholder="john.doe@example.com" autofocus required class="input-xlarge" type="text" data-bind="value: selectedInvitee">
+													&nbsp;&nbsp;<button id="btnInvite" class="btn btn-success" data-bind="click: invite">Send</button>
+													</div>
+												</div>
+									</div>
+						    	</fieldset>
+					    	</form>
+				    	</div>
+				    </div>
+				    
+			    </div>
+		    </div>
+			
+		</div>
+</div>
+
+<script src="/js/profile.js"></script>
+<% include footer %>

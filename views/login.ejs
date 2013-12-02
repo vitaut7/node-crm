@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Node CRM - Sales Automation Simplified [Login]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Node CRM - Sales Automation Simplified">
+    <meta name="author" content="em3rg3">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+
+    </style>
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <form class="form-signin well" method='post' action='/login'>
+      	<div style="margin-left: auto, margin-right: auto">
+      		<h2><img src="/img/logo.png"/><span style="color: #9bd9be"></span><br/><small>Selling to Business Made Easy</small></h2>
+      	</div>
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" class="input-block-level" name='user' autofocus placeholder="Username or Email">
+        <input type="password" class="input-block-level" name='password' placeholder="Password">
+        <label class="checkbox">
+          <input type="checkbox" name='remember' value="1"> Remember me
+        </label>
+        <button class="btn btn-login btn-primary" type="submit"><i class="icon-lock icon-2x icon-white"></i> Sign in</button>&nbsp;
+        <small>Not A Member?&nbsp;<a href="/register" class="">Register</a></small>
+        
+        <hr>
+        <div class="btm.links">
+        	<a href='/recover' id="#forgot-password">Forgot Your Password?</a>
+        </div>
+        
+      </form>
+
+    </div> <!-- /container -->
+
+	<script>
+		window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.js"><\/script>')
+	</script>
+	<script src="/js/vendor/bootstrap.min.js"></script>
+
+  </body>
+</html>

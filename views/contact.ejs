@@ -1,0 +1,228 @@
+<% include header %>
+
+	<div id="contact-page" class="container">
+
+		<div class="row">
+			<div class="span4">
+				<h2 style="color: #0099CC">
+					<i class="icon-group"></i> <span id="contactCategory">Contacts</span>
+				</h2>
+				<a data-bind="click: addContact" href="#" class="btn btn-small btn-primary pull-left" title="Add Contact"> <i width="85px" class="icon-plus icon-large"></i> </a>
+ 				<a data-bind="click: importContact" href="#" class="btn btn-small btn-primary pull-left" title="Import Contact" style="margin-left: 10px"> <i class="icon-download-alt icon-large"></i> </a>
+				<input type="text" class="search-query pull-right" data-bind="value: search, valueUpdate: 'keyup'" placeholder="Search">
+				<hr class="btn-info" />
+				<div class="clearfix"></div>
+				
+				<img src='/img/loader.gif' data-bind="visible: loadingContactList" style="display: none" />
+				
+				<div id="tables" style="display: none" data-bind="visible: !(loadingContactList())" >
+					<table class="table table-striped table-hover" style="padding-top: 0px; padding-bottom: 0px">
+					   <tbody data-bind="foreach: pagedList">
+					        <tr>
+								<td class="contactname" style="cursor: pointer" data-bind="click: $parent.displayInfo"><i class="icon-user"></i><span style="padding-top: 10px; padding-left: 5px" data-bind="text: $data.Company_Name"></span></td>
+								<td class="buttons" width="20px">
+					                <a href="#"><i class="icon-chevron-right"></i></a>
+					            </td>
+					        </tr>
+					    </tbody>
+					</table>
+					
+					<div class="pager">
+					    <ul>
+					    	<li data-bind="css: { disabled: pageIndex() === 0 }"><a href="#" data-bind="click: previousPage">Previous</a></li>
+					    	<li data-bind="css: { disabled: pageIndex() === maxPageIndex() }"><a href="#" data-bind="click: nextPage">Next</a></li>
+					    </ul>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class="span8">
+				<h2>&nbsp;</h2>
+				
+				<div id="contactInfo" class="pull-left" style="color: steelblue;"></div>
+				<div class="clearfix"></div>
+				
+				<!-- Form To Update Contact Information -->
+				<div data-bind="visible: displayingInfo || !contactUpdating, with: selectedContact" class="pull-right" style="display: none">
+					<a class="btn btn-small btn-danger" data-bind="click: $parent.remove" title="Delete"><i class="icon-trash icon-large"></i> Delete</a>&nbsp;
+					<a href="#" class="btn btn-small btn-primary" data-bind="click: $parent.updateContact" title="Edit"><i class="icon-edit icon-large"></i> Edit</a>&nbsp;
+					<a href="#" class="btn btn-small" data-bind="click: $parent.addLead" title="New Lead"><i class="icon-flag icon-large"> New Lead</i></a>&nbsp;
+					<a href="#" class="btn btn-small" data-bind="click: $parent.addTask"><i class="icon-list-ol icon-large" title="New Task"></i> New Task</a>&nbsp;
+					<a href="#" class="btn btn-small btn-success" data-bind="click: $parent.verifyContact, visible: whoAmI.isManager && ((_.isUndefined($data.isVerified)) ||  parseInt($data.isVerified) === 0)" title="Verify"><i class="icon-ok icon-large"></i> Verify</a>&nbsp;
+				</div>
+
+				<hr class="btn-success" data-bind="visible: displayingInfo" style="display: none" />
+				<div class="clearfix"></div>
+				
+				<div id="contactDetails" style="display: none" class="pull-left" data-bind="visible: displayingInfo"></div>
+				<div class="pull-right" id="alertbox"></div>
+				<div class="clearfix"></div>
+				
+				<div id="contactUpdateForm" data-bind="visible: contactUpdating, with: selectedContact" style="display: none">
+					<form class="form-horizontal">
+						<fieldset>							
+							<div class="control-group">
+								<!-- Text input-->
+								<label class="control-label" for="input01">Company Name<sup style="font-size: 15px; color: #f00">*</sup></label>
+								<div class="controls">
+									<input required autofocus placeholder="" class="input-xlarge" type="text" data-bind="value: $data.Company_Name">
+								</div>
+							</div>
+									
+							<div class="control-group">
+								<!-- Text input-->
+								<label class="control-label" for="input01">Contact Person<sup style="font-size: 15px; color: #f00">*</sup></label>
+								<div class="controls">
+									<input placeholder="Full Name" class="input-xlarge" type="text" required data-bind="value: $data.Name">
+								</div>
+							</div>
+	
+							<div class="control-group">
+								<!-- Text input-->
+								<label class="control-label" for="input01">Phone No.<sup style="font-size: 15px; color: #f00">*</sup></label>
+								<div class="controls">
+									<div class="input-prepend">
+									<span class="add-on"><i class="icon-phone"></i></span>
+									<input style="width: 244px" placeholder="Phone Number" requird class="input-xlarge" type="text" data-bind="value: $data.Phone">
+									</div>
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<!-- Text input-->
+								<label class="control-label" for="input01">Address<sup style="font-size: 15px; color: #f00">*</sup></label>
+								<div class="controls">
+									<input placeholder="Address" class="input-xlarge" type="text" required data-bind="value: $data.Address"><br/>
+									<input placeholder="City" class="input-xlarge" type="text" required data-bind="value: $data.City">
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<!-- Text input-->
+								<label class="control-label" for="input01">Email</label>
+								<div class="controls">
+									<div class="input-prepend">
+									<span class="add-on"><i class="icon-envelope"></i></span>
+									<input style="width: 244px" placeholder="john.doe@example.com" class="input-xlarge" type="text" data-bind="value: $data.Email_Address">
+									</div>
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<!-- Text input-->
+								<label class="control-label" for="input01">Other Info</label>
+								<div class="controls">
+									<textarea placeholder="Any other information" class="input-xlarge" data-bind="value: $data.Optional"></textarea>
+									<p class="help-block"><span style="color: #f00">*</span> - Required Fields</p>
+								</div>
+							</div>
+	
+							<div class="control-group">
+								<label class="control-label"></label>
+								<!-- Button -->
+								<div class="controls">
+									<button class="btn btn-primary" data-bind="click: $parent.completeAction">Save</button>
+									<button class="btn btn-danger" data-bind="click: $parent.cancelContactUpdate">Cancel</button>
+								</div>
+							</div>
+	
+						</fieldset>
+					</form>
+				</div>
+				
+				
+				<!-- ---- New Lead ----------- -->
+				<div id="leadForm" data-bind="with: selectedLead, visible: leadUpdating" style="display: none">
+				  <form class="form-horizontal">
+				    <fieldset>
+						<div id="legend" class="">
+						  <legend><small>New Lead</small></legend>
+						</div>
+					    <div class="control-group">			
+					          <label class="control-label">Lead Source</label>
+					          <div class="controls">
+					            <select class="input-xlarge" data-bind="options: $parent.leadSources, value: $data.Lead_Source, optionsCaption: 'Select...'"></select>
+					          </div>
+					    </div>
+						<div id="description" class="control-group">				
+					          <label class="control-label" for="input01">Description</label>
+					          <div class="controls">
+					            <textarea data-bind="value: $data.Description" required placeholder="Lead Description" class="input-xlarge"></textarea>
+					          </div>
+					    </div>
+					    
+						<div id="saveLead" class="control-group">
+							<label class="control-label"></label>
+							<div class="controls">
+								<button class="btn btn-primary" data-bind="click: $parent.createLead, with: $parent.selectedLead">Save</button>
+								<button class="btn btn-danger" data-bind="click: $parent.cancelLead">Cancel</button>
+							</div>
+						</div>	
+				    </fieldset>
+				  </form>
+			    </div>
+		
+				<!--  Import Contact -->
+				<div id="importFormContainer" data-bind="visible: contactImporting" style="display: none">
+				  <form class="form-horizontal" id="importForm" method="POST" enctype="multipart/form-data">
+				    <fieldset>
+						<div id="legend" class="">
+						  <legend><small>Import Contact</small></legend>
+						</div>
+						
+						<input type="hidden" name="Category" value="Contact"/>
+						
+						<div class="control-group">
+				          <label class="control-label">Select CSV File</label>
+				          <div class="controls">
+				            <input class="input-file" required autofocus id="fileInput" type="file" name="importfile">
+				            <a href="/downloads/contact-sample.csv">Download Sample</a>
+				          </div>
+				        </div>
+					    
+						<div id="saveTask" class="control-group">
+							<label class="control-label"></label>
+							<div class="controls">
+								<button class="btn btn-primary" data-bind="click: uploadImport">Import</button>
+								<button class="btn btn-danger" data-bind="click: cancelImport">Cancel</button>
+							</div>
+						</div>	
+				    </fieldset>
+				  </form>
+				  </div>
+		
+				<!-- ---- New Task ----------- -->
+				<div id="taskForm" data-bind="with: selectedTask, visible: taskUpdating" style="display: none">
+				  <form class="form-horizontal">
+				    <fieldset>
+						<div id="legend" class="">
+						  <legend><small>New Task</small></legend>
+						</div>
+						<div id="description" class="control-group">				
+					          <label class="control-label" for="input01">Description</label>
+					          <div class="controls">
+					            <textarea data-bind="value: $data.Description" required autofocus placeholder="Task Description" class="input-xlarge"></textarea>
+					          </div>
+					    </div>
+					    
+						<div id="saveTask" class="control-group">
+							<label class="control-label"></label>
+							<div class="controls">
+								<button class="btn btn-primary" data-bind="click: $parent.createTask, with: $parent.selectedTask">Save</button>
+								<button class="btn btn-danger" data-bind="click: $parent.cancelTask">Cancel</button>
+							</div>
+						</div>	
+				    </fieldset>
+				  </form>
+			    </div>
+			    
+			</div>
+			
+		</div>
+
+	</div>
+	<!-- /container -->
+	
+	<script src="/js/contact.js"></script>
+<% include footer %>

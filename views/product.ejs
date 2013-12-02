@@ -1,0 +1,70 @@
+<% include header %>
+<style>
+	/*#tables { font-family:'lucida grande', tahoma, verdana, arial, sans-serif; font-size:11px; }
+	#tables a { color: #548dc4; text-decoration: none; }
+	#tables a:hover { text-decoration: underline; }
+	table.productgrid { border-collapse: collapse; border: 1px solid #CCB; width: 800px; }
+	table.productgrid td, table.leadgrid th { padding: 5px; border: 1px solid #E0E0E0; }
+	table.productgrid th { background: #E5E5E5; text-align: left; } */
+	#tables select { min-height: 30px; margin-top: -5px;}
+	input.invalid { background: red; color: #FDFDFD; }
+</style>
+
+<div id="product-page" class="container">
+		<div class="span12">
+				<h2 class="pull-left" style="color: #0099CC">
+					<i class="icon-tasks"></i> Products
+				</h2>
+				<div class="clearfix"></div>
+				<a href='#' class="btn btn-small btn-primary pull-left" data-bind="click: create" title="New Product"> <i class="icon-plus icon-large"></i> </a>
+				<a data-bind="click: importProduct" href="#" class="btn btn-small btn-primary pull-left" title="Import Product" style="margin-left: 10px"> <i class="icon-download-alt icon-large"></i> </a>
+				
+				<hr class="btn-info" />
+		</div>
+		<div class="span12">
+			<div id="alertbox"></div>
+			<div id="productContainer" style="width: 100%">
+				<div class="input-prepend" id="filterbar">
+					<span class="add-on"><i class="icon-search"></i></span>
+					<input type="text" placeholder="Filter" id="product-filter" style="width: 25%"/>
+				</div>
+				
+				<img src='/img/loader.gif' data-bind="visible: loadingProducts" style="display: none"/>
+				<div id="products"></div>
+				<div id="paginator" class="pagination"></div>
+			</div>
+
+			<!--  Product Import Form -->
+			<div id="importFormContainer" data-bind="visible: productImporting" style="display: none">
+			  <form class="form-horizontal" id="importForm" method="POST" enctype="multipart/form-data">
+			    <fieldset>
+					<div id="legend" class="">
+					  <legend><small>Import Product</small></legend>
+					</div>
+					
+					<div class="control-group">
+			          <label class="control-label">Select CSV File</label>
+			          <div class="controls">
+			            <input class="input-file" required autofocus id="fileInput" type="file" name="importfile">
+			            <a href="/downloads/product-sample.csv">Download Sample</a>
+			          </div>
+			        </div>
+				    
+					<div id="saveTask" class="control-group">
+						<label class="control-label"></label>
+						<div class="controls">
+							<button class="btn btn-primary" data-bind="click: uploadImport">Import</button>
+							<button class="btn btn-danger" data-bind="click: cancelImport">Cancel</button>
+						</div>
+					</div>	
+			    </fieldset>
+			  </form>
+			</div>
+		</div>
+</div>
+
+<script src="/js/vendor/editablegrid-2.0.1.min.js"></script>
+<link rel="stylesheet" href="/css/editablegrid-2.0.1.css" type="text/css" media="screen">
+<script src="/js/product.js"></script>
+
+<% include footer %>

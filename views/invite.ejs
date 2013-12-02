@@ -1,0 +1,43 @@
+<% include header %>
+<div id="invite-page" class="container">
+		<div class="span12">
+				<h2 class="pull-left">
+					<i class="icon-tasks"></i> Invite
+				</h2>
+				<div class="clearfix"></div>
+								
+				<hr class="btn-info" />
+		</div>
+		<div class="span12">
+		    <div class="tabbable"> <!-- Only required for left/right tabs -->
+			    <ul class="nav nav-tabs">
+				    <li class="active"><a href="#invite" data-toggle="tab">Invite your colleagues to join the team</a></li>
+		    	</ul>
+			    <div class="tab-content">
+				    <div class="tab-pane active" id="invite">
+				    	<div id="invitealert"></div>
+				    	<div id="inviteContact">
+					    	<form class="form-horizontal">
+						    	<fieldset>
+						    		<div class="control-group">
+												<!-- Text input-->
+												<div class="">
+													<div class="input-prepend">
+													<span class="add-on"><i class="icon-envelope"></i></span>
+													<input style="width: 244px" placeholder="john.doe@example.com" autofocus required class="input-xlarge" type="text" data-bind="value: selectedInvitee">
+													&nbsp;&nbsp;<button id="btnInvite" class="btn btn-success" data-bind="click: invite">Send</button>
+													</div>
+												</div>
+									</div>
+						    	</fieldset>
+					    	</form>
+				    	</div>
+				    </div>
+			    </div>
+		    </div>
+			
+		</div>
+</div>
+
+<script src="/js/invite.js"></script>
+<% include footer %>

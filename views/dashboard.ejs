@@ -1,0 +1,99 @@
+<% include header %>
+<style>
+	/*#tables { font-family:'lucida grande', tahoma, verdana, arial, sans-serif; font-size:11px; }
+	#tables a { color: #548dc4; text-decoration: none; }
+	#tables a:hover { text-decoration: underline; }
+	table.productgrid { border-collapse: collapse; border: 1px solid #CCB; width: 800px; }
+	table.productgrid td, table.leadgrid th { padding: 5px; border: 1px solid #E0E0E0; }
+	table.productgrid th { background: #E5E5E5; text-align: left; } */
+	#tables select { min-height: 30px; margin-top: -5px;}
+	input.invalid { background: red; color: #FDFDFD; }
+</style>
+<link rel='stylesheet' type='text/css' href='/css/fullcalendar.css' />
+<link rel='stylesheet' type='text/css' href='/css/fullcalendar.print.css' media='print' />
+
+<div id="dashboard-page" class="container">
+
+	<div class="row">
+		<div class="span12">
+			<h2 style="color: #0099CC">
+				<i class="icon-tasks"></i> Tasks</h2>
+
+			<a href='#' class="btn btn-small btn-primary pull-left" data-bind="click: create" title="New Task"> <i class="icon-plus icon-large"></i> </a>
+			
+			<hr class="btn-info" />
+			
+			<!--  Tab Content Start -->
+			<div style="width: 100%">
+				<div class="input-prepend" id="filterbar">
+					<span class="add-on"><i class="icon-search"></i></span>
+					<input type="text" placeholder="Filter" id="task-filter" style="width: 25%"/>
+				</div>
+				
+				<img src='/img/loader.gif' data-bind="visible: loadingTasks" style="display: none" />
+				<div id="tasks"></div>
+			</div><!-- End of Tab Content -->	
+					
+			<div class="clearfix"></div>
+		</div>		
+	
+		
+		<div class="span12">
+			<h2 id="tabs" name="calendar">Calendar</h2>
+			<hr class="btn-success" />
+				<!--<div class="span4">
+					<ul class="nav nav-tabs">
+						<li><a href="#A" data-toggle="tab">Yesterday</a></li>
+						<li class="active"><a href="#B" data-toggle="tab">Today</a></li>
+						<li><a href="#C" data-toggle="tab">Tomorrow</a></li>
+					</ul>
+					<div class="tabbable">
+						<div class="tab-content">
+							<div class="tab-pane" id="A">
+								<p>Yesterday's Events.</p>
+							</div>
+							<div class="tab-pane active" id="B">
+								<p>Today's Events.</p>
+							</div>
+							<div class="tab-pane" id="C">
+								<p>Upcoming Events</p>
+							</div>
+						</div>
+					</div>
+				</div>-->
+			<div class="span8" id="calendar"></div>
+		</div>
+	</div>
+
+	<hr>
+
+
+	<!-- ---- Event Modal ----------- -->
+	<div id="eventModal" class="modal hide fade">
+	    <div class="modal-header">
+	    	<button data-bind="click: cancelEvent" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    	<h5 class="muted">New Event</h5>
+	    </div>
+	    <div class="modal-body" data-bind="with: selectedEvent">
+	    	<input type="text" placeholder="Event Title" autofocus required data-bind="value: $data.title"/><br/>
+	    	<textarea placeholder="Event Description" data-bind="value: $data.description"></textarea>
+	    </div>
+	    <div class="modal-footer">
+	    	<a href="#" class="btn" data-bind="click: cancelEvent">Close</a>
+	    	<a href="#" class="btn btn-primary" data-bind="click: createEvent">Save</a>
+	    </div>
+    </div>
+	<!-- ----End of Event Modal----------- -->
+
+</div>
+<!-- /container -->
+
+<script src="/js/vendor/editablegrid-2.0.1.js"></script>
+<link rel="stylesheet" href="/css/editablegrid-2.0.1.css" type="text/css" media="screen">
+
+<script type='text/javascript' src='/js/vendor/fullcalendar.min.js'></script>
+<script type='text/javascript' src='/js/vendor/jquery-ui-1.8.23.custom.min.js'></script>
+
+<script src="/js/dashboard.js"></script>
+
+<% include footer %>

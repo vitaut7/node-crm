@@ -1,0 +1,117 @@
+<% include header %>
+<style>
+	/*#tables { font-family:'lucida grande', tahoma, verdana, arial, sans-serif; font-size:11px; }
+	#tables a { color: #548dc4; text-decoration: none; }
+	#tables a:hover { text-decoration: underline; }
+	table.leadgrid { border-collapse: collapse; border: 1px solid #CCB; width: 800px; }
+	table.leadgrid td, table.leadgrid th { padding: 5px; border: 1px solid #E0E0E0; }
+	table.leadgrid th { background: #E5E5E5; text-align: left; } */
+	
+	table.leadhistorygrid th { background-color: #d9edf7; border-color: #bce8f1; }
+	table.leadhistorygrid th a { color: #3a87ad }
+	
+	#tables select { min-height: 30px; margin-top: -5px;}
+	input.invalid { background: red; color: #FDFDFD; }
+</style>
+
+<div id="lead-page" class="container">
+		<div class="span12">
+				<h2 style="color: #0099CC">
+					<i class="icon-tasks"></i> Leads
+				</h2>
+				<hr class="btn-info" />
+		</div>
+		<div class="span12 row">
+			<div id="alertbox"></div>
+			<div class="tabbable">
+				<!-- Only required for left/right tabs -->
+				<ul class="nav nav-tabs">
+					<li data-bind="css: {active : !opportunitySelected()}"><a data-bind="click: updateSelectedTab" href="#newtab" data-toggle="tab"><i class="icon-flag"></i> New</a></li>
+					<li data-bind="css: {active : opportunitySelected()}"><a data-bind="click: updateSelectedTab" href="#opportunitytab" data-toggle="tab"><i class="icon-star"></i> Opportunities</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane" data-bind="css: {active : !opportunitySelected()}" id="newtab">
+						<!--  Tab Content Start -->
+						<div id="tables" class="span10">
+						<div class="input-prepend" id="newFilterbar">
+							<span class="add-on"><i class="icon-filter"></i></span>
+							<input type="text" placeholder="Filter" id="new-lead-filter" style="width: 50%"/>
+						</div>
+							
+							<img src='/img/loader.gif' data-bind="visible: loadingNewLeads" style="display: none" />
+							<div id="newLeads"></div>
+						</div><!-- End of Tab Content -->
+					</div>
+					<div class="tab-pane" data-bind="css: {active : opportunitySelected()}" id="opportunitytab">
+						<!--  Tab Content Start -->
+						<div id="tables" class="span10">
+						<div class="input-prepend" id="opportunityFilterbar">
+							<span class="add-on"><i class="icon-filter"></i></span>
+							<input type="text" placeholder="Filter" id="opportunity-lead-filter" style="width: 50%"/>
+						</div>
+							
+							<img src='/img/loader.gif' data-bind="visible: loadingOpportunityLeads" style="display: none" />
+							<div id="opportunityLeads"></div>
+						</div><!-- End of Tab Content -->
+					</div>
+				</div>
+			</div>
+			
+			<hr class="btn-danger" />
+			
+			<!--  Lead History -->
+			<div class="span10 row" id="leadHistoryContainer" data-bind="visible: !updatingLeadHistory, with: selectedLead" style="display: none">
+				<div>
+					<div class="pull-left" style="margin-right: 10px;">
+						<span class="label btn-success" style="font-size: 18px; font-weight: bold; padding-top: 6px; padding-bottom: 8px; margin-top: 1px" data-bind="text: $data.Lead_Name"></span>
+					</div>
+					
+					<div class="input-prepend pull-left" id="leadHistoryFilterbar" style="display: block">
+						<span class="add-on btn-success"><i class="icon-filter"></i></span>
+						<input type="text" placeholder="Filter History" id="lead-history-filter"/>
+					</div>
+					
+					<div class="pull-right">
+						<!-- <a href="#" class='padding-right: 5px' class='btn btn-small pull-right' data-bind="click: $parent.cancelHistory"><i class="icon-remove icon-large"></i></a> -->
+						<a href="#" class='btn btn-success btn-small pull-right' data-bind="click: $parent.addLeadHistory"><i class="icon-plus icon-large"></i></a>
+					</div>
+					
+					<div class="clearfix"></div>
+				</div>
+				
+				<div style="padding-top: 5px" id="leadHistory"></div>
+			</div>
+			
+			<!-- ---- Add Lead History ----------- -->
+			<div id="leadHistoryForm" data-bind="visible: updatingLeadHistory, with: selectedLeadHistory" style="display: none">
+			  <form class="form-horizontal">
+			    <fieldset>
+					<div id="legend" class="">
+					  <legend><small><span data-bind="text: $data.Lead_Name"></span></small></legend>
+					</div>
+					<div id="comment" class="control-group">				
+				          <label class="control-label" for="input01">Comment</label>
+				          <div class="controls">
+				            <input type="text" required autofocus data-bind="value: Comment" placeholder="Lead History Comment" class="input-xlarge"/>
+				          </div>
+				    </div>
+				    
+					<div id="saveOrder" class="control-group">
+						<label class="control-label"></label>
+						<div class="controls">
+							<button class="btn btn-primary" data-bind="click: $parent.createLeadHistory">Save</button>
+							<button class="btn btn-danger" data-bind="click: $parent.cancelLeadHistory">Cancel</button>
+						</div>
+					</div>	
+			    </fieldset>
+			  </form>
+		    </div>
+			
+		</div>
+
+</div>
+
+<script src="/js/vendor/editablegrid-2.0.1.js"></script>
+<link rel="stylesheet" href="/css/editablegrid-2.0.1.css" type="text/css" media="screen">
+<script src="/js/lead.js"></script>
+<% include footer %>

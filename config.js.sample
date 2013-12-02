@@ -1,0 +1,7 @@
+var GLOBAL.PASSWORD_LENGTH = 8;
+var GLOBAL.AUTH_TOKEN_LENGTH = 40  ;
+var GLOBAL.PASSWORD_RESET_EXPIRY = 1; // In Days
+
+var GLOBAL.ENABLE_EMAIL_REGISTRATION = false;
+var GLOBAL.EMAIL_USERNAME = "somerandomusername@gmail.com";
+var GLOBAL.EMAIL_PASSWORD = "somepassword";

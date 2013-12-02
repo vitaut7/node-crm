@@ -1,0 +1,40 @@
+<% include header %>
+<div id="report-page" class="container">
+	<h1 style="color: #0099CC"><i class="icon-signal"></i> Reports</h1>
+	
+	<div id="loading"><img src='/img/loader.gif' /> Please wait while report is generated ...</div>
+	<!-- Main hero unit for a primary marketing message or call to action -->
+	<div id="heroContainer" class="span12" style="display: none">
+ 			<div class="pull-left" style="display: none">
+ 				<h4 class="muted" style="padding-left: 200px">Sales Pipeline</h4> <br/>
+ 				<canvas id="cvsFunnel" width="480px" height="250px" !style="border: 1px solid #ccc">[No canvas support]</canvas>
+					
+ 			</div>
+ 			<div class="pull-left" style="padding-left: 180px" style="display: none">
+ 				<h4 class="muted" style="padding-left: 50px">Efficiency &amp; Sales</h4><br/>
+ 				<canvas id="cvsGauge" width="250px" height="250px" !style="border: 1px solid #ccc">[No canvas support]</canvas>
+ 			</div>
+						
+ 			<div class="span12">
+ 				<h4 class="muted" style="padding-left: 390px">Task Progress</h4>
+ 				<canvas id="cvsProgress" width="900px" height="80px" !style="border: 1px solid #ccc">[No canvas support]</canvas>
+ 			</div>
+	</div>
+
+</div>
+
+<script src="/js/vendor/rgraph/libraries/RGraph.common.core.min.js"></script>
+<script src="/js/vendor/rgraph/libraries/RGraph.common.tooltips.min.js"></script>
+<script src="/js/vendor/rgraph/libraries/RGraph.common.dynamic.min.js"></script>
+<script src="/js/vendor/rgraph/libraries/RGraph.common.effects.min.js"></script>
+<script src="/js/vendor/rgraph/libraries/RGraph.common.key.min.js"></script>
+
+<script src="/js/vendor/rgraph/libraries/RGraph.line.min.js"></script>
+<script src="/js/vendor/rgraph/libraries/RGraph.bar.min.js"></script>
+<script src="/js/vendor/rgraph/libraries/RGraph.hprogress.min.js"></script>
+<script src="/js/vendor/rgraph/libraries/RGraph.funnel.min.js"></script>
+<script src="/js/vendor/rgraph/libraries/RGraph.gauge.min.js"></script>
+<!--[if lt IE 9]><script src="/js/vendor/rgraph/excanvas/excanvas.min.js"></script><![endif]-->
+
+<script src="/js/report.js"></script>
+<% include footer %>
