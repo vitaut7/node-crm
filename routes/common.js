@@ -119,8 +119,8 @@ exports.getRequiredFields = function(obj){
 	fields = _.difference(fields,removeFields);
 	
 	return _.filter(fields,function(f){ 
-		if(Contact.schema.paths && Contact.schema.paths[f] && Contact.schema.paths[f].validators && Contact.schema.paths[f].validators[0]) 
-			return Contact.schema.paths[f].validators[0][2] === 'required'; 
+		if(schema.paths && schema.paths[f] && schema.paths[f].validators && schema.paths[f].validators[0]) 
+			return schema.paths[f].validators[0][2] === 'required'; 
 		else 
 			return false; 
 	});	
